@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+.container {width: 270px;margin-top: 10px;line-height:30px;text-align:center;}
+.cell {display: inline-block;width: 30px;height: 30px;outline: 1px solid #aaa;}
+.cell-move {transition:1s;}
+</style>
+</head>
+<body>
+<div id="list-demo" class="demo">
+  <button @click="shuffle">shuffle</button>
+  <transition-group name="cell" tag="div" class="container">
+    <span v-for="cell in cells" :key="cell.id" class="cell">{{ cell.number }}</span>
+  </transition-group>
+</div>
+<script type="text/javascript" src="http://sandbox.runjs.cn/uploads/rs/26/ddzmgynp/vue.js"></script>
+<script>
+new Vue({
+  el: '#list-demo',
+   data: {
+      cells: Array.apply(null, { length: 81 })
+        .map(function (_, index) { 
+          return {
+            id: index,
+            number: index % 9 + 1
+          }
+        })
+    },
+  methods: {
+    shuffle(){
+      this.cells = this.cells.sort(()=>{return Math.random() - 0.5;})
+    },
+  }
+})
+</script>
+</body>
+</html>
